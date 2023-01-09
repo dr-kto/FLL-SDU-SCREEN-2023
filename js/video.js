@@ -38,11 +38,11 @@ async function getData() {
         document.querySelector('.info1').innerHTML = data?.table.cols[1].label.replace(new RegExp("^([^\sT]+) ","gm"), "")
         if(parallel)
         {
-            document.querySelector('.nleft').innerHTML = data?.table.cols[4].label.replace(new RegExp(".+ ","gm"), "")
-            document.querySelector('.nright').innerHTML = data?.table.cols[5].label.replace(new RegExp(".+ ","gm"), "")
-            document.querySelector('.sleft').innerHTML = data?.table.rows[0].c[4]?.v
-            document.querySelector('.sright').innerHTML = data?.table.rows[0].c[5]?.v
-            document.querySelector('.info1').innerHTML = data?.table.cols[1].label.replace(new RegExp("^([^\sT]+) ","gm"), "")
+            document.querySelector('.plname').innerHTML = data?.table.cols[4].label.replace(new RegExp(".+ ","gm"), "")
+            document.querySelector('.prname').innerHTML = data?.table.cols[5].label.replace(new RegExp(".+ ","gm"), "")
+            document.querySelector('.plscore').innerHTML = data?.table.rows[0].c[4]?.v
+            document.querySelector('.prscore').innerHTML = data?.table.rows[0].c[5]?.v
+            document.querySelector('.pinfo1').innerHTML = data?.table.cols[1].label.replace(new RegExp("^([^\sT]+) ","gm"), "")
         }
 
         getData()
@@ -55,18 +55,18 @@ async function getData() {
 }
 getData()
 
-function start() {
+function start(element) {
     let minute = 0;
     let second = 3;
     let operation = 1
-    document.querySelector(".timer").style.fontSize = `4vw`
-    countdown(minute, second, operation)
+    element.style.fontSize = `4vw`
+    countdown(element, minute, second, operation)
 
     // countdown(minute, second)
 
 
 }
-function countdown(minute, second, operation) {
+function countdown(element, minute, second, operation) {
     var total = minute * 60 + second;
 
     var timer = setInterval(function () {
@@ -79,28 +79,27 @@ function countdown(minute, second, operation) {
         if (tsec < 10) {
             tsec = "0" + tsec
         }
-        document.querySelector(".timer").innerHTML = tmin + ":" + tsec;
+        element.innerHTML = tmin + ":" + tsec;
         if (total <= 0) {
             if (operation === 2) {
-                document.querySelector(".timer").style.fontSize = `2vw`
+                element.style.fontSize = `2vw`
                 var mend = new Audio('match_end.mp3')
                 mend.play()
-                document.querySelector(".timer").innerHTML = "GAME OVER";
+                element.innerHTML = "GAME OVER";
                 clearInterval(timer)
             }
             if (operation === 1) {
-                document.querySelector(".timer").innerHTML = ""
-                document.querySelector(".timer").style.fontSize = `0.3vw`
+                element.innerHTML = ""
+                element.style.fontSize = `0.3vw`
                 var mstart = new Audio('match_start.wav')
                 mstart.play()
-                document.querySelector(".timer").innerHTML = "START"
-
-                document.querySelector(".timer").style.fontSize = `4vw`
+                element.innerHTML = "START"
+                element.style.fontSize = `4vw`
 
                 minute = 2
                 second = 30
                 operation = 2
-                countdown(minute, second, operation)
+                countdown(element, minute, second, operation)
                 clearInterval(timer)
             }
 
@@ -124,15 +123,19 @@ function countdown(minute, second, operation) {
 
 window.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        start()
+        start(document.querySelector(".timer"))
     }
 
     if (e.code === 'Space') {
-        getData()
+        start(document.querySelector(".ptimer"))
     }
     if (e.code === 'KeyS') {
         this.document.querySelector('.logo').classList.toggle('score_anima')
         this.document.querySelector('.timer').classList.toggle('score_anima')
+    }
+    if (e.code === 'KeyO') {
+        this.document.querySelector('.plogo').classList.toggle('score_anima')
+        this.document.querySelector('.ptimer').classList.toggle('score_anima')
     }
     if (e.key === 'b') {
 
@@ -148,6 +151,7 @@ window.addEventListener('keypress', function (e) {
     if (e.code === "KeyP")
     {
         parallel = !parallel;
+        document.querySelector('.parallel').classList.toggle("dNone")
     }
     if (e.code === 'KeyG') 
     {
