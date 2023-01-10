@@ -36,14 +36,14 @@ async function getData() {
         document.querySelector('.sleft').innerHTML = data?.table.rows[0].c[2]?.v
         document.querySelector('.sright').innerHTML = data?.table.rows[0].c[3]?.v
         document.querySelector('.info1').innerHTML = data?.table.cols[1].label.replace(new RegExp("^([^\sT]+) ","gm"), "")
-        if(parallel)
-        {
+        // if(parallel)
+        // {
             document.querySelector('.plname').innerHTML = data?.table.cols[4].label.replace(new RegExp(".+ ","gm"), "")
             document.querySelector('.prname').innerHTML = data?.table.cols[5].label.replace(new RegExp(".+ ","gm"), "")
             document.querySelector('.plscore').innerHTML = data?.table.rows[0].c[4]?.v
             document.querySelector('.prscore').innerHTML = data?.table.rows[0].c[5]?.v
             document.querySelector('.pinfo1').innerHTML = data?.table.cols[1].label.replace(new RegExp("^([^\sT]+) ","gm"), "")
-        }
+        // }
 
         getData()
     } catch (error) {

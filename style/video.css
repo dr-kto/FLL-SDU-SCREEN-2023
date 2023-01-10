@@ -82,7 +82,7 @@
         display: flex;
         font-size: 1.2vw;
         text-align: center;
-        margin: 0 1vw auto 6vw;
+        margin: 0 0.5vw auto 5vw;
         color: rgb(0, 0, 0);
         text-transform: uppercase;
         position: relative;
@@ -159,9 +159,10 @@
     }
     #gum-local {
         position: absolute;
-        top: 0;
+        top: -15vw;
         right: 0;
-        width: 210vmin;
+        width: 191vmin;
+        
     }
     .logo img {
         object-fit: contain;
